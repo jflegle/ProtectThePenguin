@@ -7,10 +7,10 @@ package  Game
 	{
 		public var fsm:FiniteStateMachine;
 		private var _tweenList:Array = new Array(	
-			{x:-400, z:-400, time:2000},
+			{x:-400, z:-300, time:2000},
 			{time:2000},
 			{h:180, time:10},
-			{x:300, z:-400, time:2000},
+			{x:300, z:-300, time:2000},
 			{time:2000},
 			{h:180, time:10});
 		
@@ -19,7 +19,7 @@ package  Game
 			super(engine);
 			
 			SetModel("FishModel", engine );
-			SetPosition(700,15,-400);
+			SetPosition(700,15,-300);
 			
 			AddAnimation("swim1", 0, 349 );
 			

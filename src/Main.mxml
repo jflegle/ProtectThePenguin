@@ -91,7 +91,7 @@
 				});
 				
 				game.level.AddMessageListener("DoneLoading", function( ):void {
-					currentState='stGameplay';
+					currentState='stGameplay';					
 					stage.getChildAt(0).visible = false;// turn off menu
 				});				
 				

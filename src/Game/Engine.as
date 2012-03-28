@@ -23,6 +23,7 @@ package  Game
 		private var /*_scene:Viewer3D;//*/_scene:Scene3D; // Viewer3D for debug camera
 		private var _modelList:Array = new Array(); // hold all the loaded models
 		private var _shaderList:Array = new Array(); // hold all the textures
+		private var _stage:Stage;
 		
 		
 		public function Engine()
@@ -34,6 +35,7 @@ package  Game
 		{
 			// creates a new 3d scene.
 			_scene = new Scene3D( container );//*/new Viewer3D( container ); // Viewer3D for debug camera
+			_stage = container.stage;
 			_scene.registerClass( Flare3DLoader1 );
 			_scene.ignoreInvisibleUnderMouse = false;
 			_scene.antialias = 2;
@@ -65,6 +67,11 @@ package  Game
 		public function GetScene( ):/*Viewer3D//*/Scene3D // Viewer3D for debug camera
 		{
 			return _scene;
+		}
+		
+		public function GetStage( ):Stage
+		{
+			return _stage;	
 		}
 		
 		public function Render( ):void
