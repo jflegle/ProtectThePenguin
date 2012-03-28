@@ -24,11 +24,47 @@
 			{
 				currentState='stHelp1';
 			}
+				
+			protected function button_clickHandler_1():void
+			{					
+				stage.addChild( game );
+				
+				game.level.AddMessageListener("Win", function( ):void {
+					richtext5.text = game.level.GetScore().toString(); // score
+					richtext7.text = richtext5.text; // score
+					richtext4.text = game.level.GetLevel().toString(); // level
+					richtext8.text = "0"; // record
+					richtext6.text = "0"; // record
+					currentState='stWin';
+					stage.getChildAt(0).visible = true; // turn on menu
+				});
+				
+				game.level.AddMessageListener("Lose", function( ):void {
+					currentState='stLose';
+					stage.getChildAt(0).visible = true;  // turn on menu
+				});
+				
+				currentState='stGameplay';
+				stage.getChildAt(0).visible = false;// turn off menu				
+			}
 
 			protected function button_clickHandler_2():void
 			{
 				currentState='stMainMenu';
 			}
+
+
+			
+
+
+			
+
+
+			
+
+
+			
+
 
 			protected function button_clickHandler_3():void
 			{
@@ -68,7 +104,14 @@
 				game.level.DispatchMessage("onContinue");
 				stage.getChildAt(0).visible = false;// turn off menu
 			}
+
+
 			
+
+
+			
+
+
 			protected function button_clickHandler_1():void
 			{
 				currentState='stLoad';
@@ -79,8 +122,8 @@
 					richtext5.text = game.level.GetScore().toString(); // score
 					richtext7.text = richtext5.text; // score
 					richtext4.text = game.level.GetLevel().toString(); // level
-					richtext8.text = game.level.GetRecord().toString(); // record
-					richtext6.text = richtext8.text; // record
+					richtext8.text = "0"; // record
+					richtext6.text = "0"; // record
 					currentState='stWin';
 					stage.getChildAt(0).visible = true; // turn on menu
 				});
@@ -90,11 +133,8 @@
 					stage.getChildAt(0).visible = true;  // turn on menu
 				});
 				
-				game.level.AddMessageListener("DoneLoading", function( ):void {
-					currentState='stGameplay';
-					stage.getChildAt(0).visible = false;// turn off menu
-				});				
-				
+				currentState='stGameplay';
+				stage.getChildAt(0).visible = false;// turn off menu
 			}
 
 		]]>
