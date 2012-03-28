@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+		width="97" height="109">
+	<fx:Metadata>[HostComponent("spark.components.Button")]</fx:Metadata>
+	<s:states>
+		<s:State name="up"/>
+		<s:State name="over"/>
+		<s:State name="down"/>
+		<s:State name="disabled"/>
+	</s:states>
+	<fx:DesignLayer d:userLabel="btnLeft2_3">
+		<s:BitmapImage id="bitmapimage11" d:userLabel="btnLeft" x="6" y="7" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/btnLeft.png')"
+					   visible.disabled="false"
+					   visible.over="false"/>
+		<s:BitmapImage d:userLabel="btnLeftDis" x="6" y="7" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/btnLeftDis.png')"
+					   visible.down="false"
+					   visible.over="false"
+					   visible.up="false"/>
+		<s:BitmapImage d:userLabel="btnLeftLg" x="0" y="0" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/btnLeftLg.png')"
+					   visible.disabled="false"
+					   visible.down="false"
+					   visible.up="false"/>
+	</fx:DesignLayer>
+</s:Skin>

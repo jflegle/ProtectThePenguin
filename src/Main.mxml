@@ -1,0 +1,966 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s:Application xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+			   xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:fc="http://ns.adobe.com/flashcatalyst/2009"
+			   xmlns:package="Game.*"
+			   width="640" height="480"
+			   backgroundAlpha="0"			   
+			   creationComplete="application_creationCompleteHandler()" currentState="stStart"
+			   preloaderChromeColor="#FFFFFF" fc:previewHeight="480" fc:previewWidth="640">
+	
+	<fx:Declarations>
+		<package:CatchAPenguin id="game"/>
+	</fx:Declarations>
+	<fx:Style source="Main.css"/>
+	<fx:Script>
+		<![CDATA[	
+			protected function application_creationCompleteHandler():void
+			{
+				currentState='stMainMenu';				
+			}
+
+			protected function button_clickHandler():void
+			{
+				currentState='stHelp1';
+			}
+				
+			protected function button_clickHandler_1():void
+			{					
+				stage.addChild( game );
+				
+				game.level.AddMessageListener("Win", function( ):void {
+					richtext5.text = game.level.GetScore().toString(); // score
+					richtext7.text = richtext5.text; // score
+					richtext4.text = game.level.GetLevel().toString(); // level
+					richtext8.text = "0"; // record
+					richtext6.text = "0"; // record
+					currentState='stWin';
+					stage.getChildAt(0).visible = true; // turn on menu
+				});
+				
+				game.level.AddMessageListener("Lose", function( ):void {
+					currentState='stLose';
+					stage.getChildAt(0).visible = true;  // turn on menu
+				});
+				
+				currentState='stGameplay';
+				stage.getChildAt(0).visible = false;// turn off menu				
+			}
+
+			protected function button_clickHandler_2():void
+			{
+				currentState='stMainMenu';
+			}
+
+			protected function button_clickHandler_3():void
+			{
+				currentState='stHelp2';
+			}
+
+
+			protected function btnRight2_3_clickHandler():void
+			{
+				currentState='stHelp3';
+			}
+
+
+			protected function button_clickHandler_4():void
+			{
+				currentState='stHelp1';
+			}
+
+
+			protected function btnRight1_2_clickHandler():void
+			{
+				currentState='stHelp2';
+			}
+
+
+			protected function button_clickHandler_5():void
+			{
+				currentState='stGameplay';
+				game.level.DispatchMessage("onContinue");
+				stage.getChildAt(0).visible = false;// turn off menu
+			}
+
+
+			protected function button_clickHandler_6():void
+			{
+				currentState='stGameplay';
+				game.level.DispatchMessage("onContinue");
+				stage.getChildAt(0).visible = false;// turn off menu
+			}
+
+
+			protected function button_clickHandler_7():void
+			{
+				// win				
+			}
+
+
+			protected function button_clickHandler_8():void
+			{
+				// lose
+			}
+
+		]]>
+
+	</fx:Script>
+
+	<s:states>
+		<s:State name="stMainMenu"/>
+		<s:State name="stStart"/>
+		<s:State name="stHelp1"/>
+		<s:State name="stGameplay"/>
+		<s:State name="stHelp2"/>
+		<s:State name="stHelp3"/>
+		<s:State name="stWin"/>
+		<s:State name="stLose"/>
+		<s:State name="stBlank"/>
+		<s:State name="stLoad"/>
+	</s:states>
+	<s:BitmapImage d:userLabel="imgFakeBkg"
+				   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="-41"
+				   y="-39" d:locked="true" smooth="true"
+				   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgFakeBkg.png')"
+				   visible.stGameplay="false"
+				   visible.stLose="false"
+				   visible.stWin="false"/>
+	<fx:DesignLayer d:userLabel="Game Over"
+					visible.stHelp1="false"
+					visible.stHelp2="false"
+					visible.stHelp3="false"
+					visible.stMainMenu="false"
+					visible.stStart="false"
+					visible.stWin="false">
+		<fx:DesignLayer d:userLabel="mat">
+			<s:BitmapImage id="bitmapimage16" d:userLabel="imgBkgLose"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="12" y="98" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgBkgLose.png')"
+						   y.stGameplay="515"/>
+			<s:BitmapImage id="bitmapimage18" d:userLabel="txtScore"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="63" y="142" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/txtScore.png')"
+						   x.stGameplay="-281"/>
+			<s:BitmapImage id="bitmapimage19" d:userLabel="txtRecord"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="18" y="238" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/txtRecord.png')"
+						   x.stGameplay="-326"/>
+			<fx:DesignLayer d:userLabel="Lose Var BKGs"
+							visible.stHelp1="false">
+				<s:BitmapImage id="bitmapimage28" d:userLabel="imgLoseBkg2"
+							   includeIn="stGameplay,stHelp1,stLose" x="207" y="270" smooth="true"
+							   source="@Embed('/assets/images/win lose bkgs/imgLoseBkg2.png')"
+							   transformX="120.0" transformY="26.0"
+							   x.stGameplay="350" y.stGameplay="261" alpha.stGameplay="0"
+							   x.stLose="350" y.stLose="261"/>
+				<s:BitmapImage id="bitmapimage27" d:userLabel="imgLoseBkg1"
+							   includeIn="stGameplay,stHelp1,stLose" x="207" y="175" smooth="true"
+							   source="@Embed('/assets/images/win lose bkgs/imgLoseBkg1.png')"
+							   transformX="120.0" transformY="26.0"
+							   x.stGameplay="350" y.stGameplay="165" alpha.stGameplay="0"
+							   x.stLose="350" y.stLose="165"/>
+			</fx:DesignLayer>
+			<s:Label id="richtext7" d:userLabel="varScore"
+						includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						x="368" y="181" color="#00ffcc" fontFamily="Heavy Heap" fontSize="50.46"
+						kerning="off" lineHeight="120%"
+						alpha.stGameplay="0" text="0">				
+			</s:Label>
+			<s:Label id="richtext8" d:userLabel="varRecord"
+						includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						x="368" y="277" color="#00ffcc" fontFamily="Heavy Heap" fontSize="50.46"
+						kerning="off" lineHeight="120%" 
+						alpha.stGameplay="0" text="0">				
+			</s:Label>
+		</fx:DesignLayer>
+		<s:Button id="button5" includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stWin"
+				  x="168" click="button_clickHandler_6()" skinClass="components.btnReplay"
+				  y.stGameplay="732"
+				  y.stHelp1="310"
+				  y.stHelp2="310"
+				  y.stHelp3="310"
+				  y.stLose="310"
+				  y.stMainMenu="310"
+				  y.stWin="310"/>
+		<s:BitmapImage id="bitmapimage17" d:userLabel="txtGameOver"
+					   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+					   x="116" y="41" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/txtGameOver.png')"
+					   y.stGameplay="-121"/>
+	</fx:DesignLayer>
+	<fx:DesignLayer d:userLabel="Success"
+					visible.stHelp1="false"
+					visible.stHelp2="false"
+					visible.stHelp3="false"
+					visible.stLose="false"
+					visible.stMainMenu="false"
+					visible.stStart="false">
+		<fx:DesignLayer d:userLabel="matte">
+			<s:BitmapImage id="bitmapimage11" d:userLabel="imgBkgWin"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="12" y="98" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgBkgWin.png')"
+						   y.stGameplay="517"/>
+			<s:BitmapImage id="bitmapimage14" d:userLabel="imgLevel"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="5" y="142" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgLevel.png')"
+						   x.stGameplay="-339"/>
+			<s:BitmapImage id="bitmapimage13" d:userLabel="imgScore"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="4" y="190" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgScore.png')"
+						   x.stGameplay="-340"/>
+			<s:BitmapImage id="bitmapimage12" d:userLabel="imgRecord"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="18" y="238" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgRecord.png')"
+						   x.stGameplay="-326"/>
+			<fx:DesignLayer d:userLabel="Win Var BKGs"
+							visible.stHelp1="false">
+				<s:BitmapImage id="bitmapimage26" d:userLabel="imgWinBkg3"
+							   includeIn="stGameplay,stHelp1,stWin" x="207" y="271" smooth="true"
+							   source="@Embed('/assets/images/win lose bkgs/imgWinBkg3.png')"
+							   transformX="120.0" transformY="26.0"
+							   x.stGameplay="349" y.stGameplay="261" alpha.stGameplay="0"
+							   x.stWin="349" y.stWin="261"/>
+				<s:BitmapImage id="bitmapimage25" d:userLabel="imgWinBkg2"
+							   includeIn="stGameplay,stHelp1,stWin" x="207" y="221" smooth="true"
+							   source="@Embed('/assets/images/win lose bkgs/imgWinBkg2.png')"
+							   transformX="120.0" transformY="26.0"
+							   x.stGameplay="349" y.stGameplay="211" alpha.stGameplay="0"
+							   x.stWin="349" y.stWin="211"/>
+				<s:BitmapImage id="bitmapimage24" d:userLabel="imgWinBkg1"
+							   includeIn="stGameplay,stHelp1,stWin" x="207" y="171" smooth="true"
+							   source="@Embed('/assets/images/win lose bkgs/imgWinBkg1.png')"
+							   transformX="120.0" transformY="26.0"
+							   x.stGameplay="349" y.stGameplay="161" alpha.stGameplay="0"
+							   x.stWin="349" y.stWin="161" alpha.stWin="1"/>
+			</fx:DesignLayer>
+			<s:Label id="richtext4" d:userLabel="varLevel"
+						includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						x="368" y="181" color="#00ffcc" fontFamily="Heavy Heap" fontSize="50.46"
+						kerning="off" lineHeight="120%"
+						visible.stGameplay="false" alpha.stGameplay="0"
+						text="0"
+						y.stWin="177">
+			</s:Label>
+			<s:Label id="richtext5" d:userLabel="varScore"
+						includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						x="368" y="229" color="#00ffcc" fontFamily="Heavy Heap" fontSize="50.46"
+						kerning="off" lineHeight="120%"
+						visible.stGameplay="false" alpha.stGameplay="0"
+						text="0"
+						y.stWin="227">
+			</s:Label>
+			<s:Label id="richtext6" d:userLabel="varRecord"
+						includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						x="368" y="277" color="#00ffcc" fontFamily="Heavy Heap" fontSize="50.46"
+						kerning="off" lineHeight="120%"
+						visible.stGameplay="false" alpha.stGameplay="0"
+						text="0">				
+			</s:Label>
+		</fx:DesignLayer>
+		<s:Button id="button4" includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stWin"
+				  x="207" click="button_clickHandler_5()" skinClass="components.btnNextLevel"
+				  y.stGameplay="729"
+				  y.stHelp1="310"
+				  y.stHelp2="310"
+				  y.stHelp3="310"
+				  y.stLose="310"
+				  y.stMainMenu="310"
+				  y.stWin="310"/>
+		<s:BitmapImage id="bitmapimage15" d:userLabel="txtYouWin"
+					   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+					   x="132" y="41" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/txtYouWin.png')"
+					   y.stGameplay="-121"/>
+	</fx:DesignLayer>
+	<fx:DesignLayer d:userLabel="Help"
+					visible.stGameplay="false"
+					visible.stLose="false"
+					visible.stStart="false"
+					visible.stWin="false">
+		<s:BitmapImage id="bitmapimage7" d:userLabel="imgBackWindow"
+					   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="14" y="43" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgBackWindow.png')"
+					   y.stMainMenu="501"/>
+		<fx:DesignLayer d:userLabel="1"
+						visible.stHelp2="false"
+						visible.stHelp3="false">
+			<s:BitmapImage id="bitmapimage9" d:userLabel="img1"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="94" y="68" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/img1.png')"
+						   y.stMainMenu="526"/>
+			<s:BitmapImage id="bitmapimage29" d:userLabel="img Helptxt 1"
+						   includeIn="stGameplay,stHelp1,stHelp3,stMainMenu" smooth="true"
+						   source="@Embed('/assets/images/win lose bkgs2/img Helptxt 1.png')"
+						   visible.stGameplay="false" x.stGameplay="12" y.stGameplay="315"
+						   x.stHelp1="12" y.stHelp1="315"
+						   x.stHelp3="20" y.stHelp3="185"
+						   x.stMainMenu="12" y.stMainMenu="757"/>
+			<s:BitmapImage id="bitmapimage5" d:userLabel="imgMsg1"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="84" y="299" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgMsg1.png')"
+						   y.stMainMenu="757"/>
+		</fx:DesignLayer>
+		<fx:DesignLayer d:userLabel="2"
+						visible.stGameplay="false"
+						visible.stHelp1="false"
+						visible.stHelp3="false"
+						visible.stLose="false"
+						visible.stWin="false">
+			<s:BitmapImage id="bitmapimage20" d:userLabel="img2"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="94" y="68" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/img2.png')"
+						   y.stMainMenu="524"/>
+			<s:BitmapImage id="bitmapimage30" d:userLabel="img Helptxt 2"
+						   includeIn="stGameplay,stHelp2,stHelp3,stMainMenu" smooth="true"
+						   source="@Embed('/assets/images/win lose bkgs2/img Helptxt 2.png')"
+						   visible.stGameplay="false" x.stGameplay="12" y.stGameplay="315"
+						   x.stHelp2="12" y.stHelp2="315"
+						   x.stHelp3="20" y.stHelp3="185"
+						   x.stMainMenu="12" y.stMainMenu="757"/>
+			<s:BitmapImage id="bitmapimage21" d:userLabel="imgMsg2"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="13" y="309" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgMsg2.png')"
+						   y.stMainMenu="765"/>
+		</fx:DesignLayer>
+		<fx:DesignLayer d:userLabel="3"
+						visible.stGameplay="false"
+						visible.stHelp1="false"
+						visible.stHelp2="false"
+						visible.stLose="false"
+						visible.stWin="false">
+			<s:BitmapImage id="bitmapimage23" d:userLabel="img3"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="94" y="68" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/img3.png')"
+						   y.stMainMenu="526"/>
+			<s:BitmapImage id="bitmapimage31" d:userLabel="img Helptxt 3"
+						   includeIn="stHelp3,stMainMenu" x="12" y="315" smooth="true"
+						   source="@Embed('/assets/images/win lose bkgs2/img Helptxt 3.png')"
+						   y.stMainMenu="757"/>
+			<s:BitmapImage id="bitmapimage22" d:userLabel="imgMsg3"
+						   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+						   x="27" y="301" smooth="true"
+						   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgMsg3.png')"
+						   y.stMainMenu="759"/>
+		</fx:DesignLayer>
+		<s:Button id="button3" includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1"
+				  x="1140" click="button_clickHandler_2()" skinClass="components.btnClose"
+				  y.stGameplay="34"
+				  x.stHelp1="569" y.stHelp1="21"
+				  x.stHelp2="569" y.stHelp2="21"
+				  x.stHelp3="569" y.stHelp3="21"
+				  y.stLose="34"
+				  visible.stMainMenu="false" x.stMainMenu="569" y.stMainMenu="-80"
+				  y.stWin="34"/>
+		<s:BitmapImage id="bitmapimage4" d:userLabel="imgHowToPlay"
+					   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="95" y="5" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgHowToPlay.png')"
+					   y.stMainMenu="-154"/>
+		<fx:DesignLayer d:userLabel="R">
+			<s:Button id="button7" d:userLabel="btnRight1_2" includeIn="stHelp1,stMainMenu" x="539"
+					  y="200" click="btnRight1_2_clickHandler()" skinClass="components.btnRight1_3"
+					  transformX="48.5" transformY="54.5"
+					  x.stMainMenu="640"/>
+			<s:Button d:userLabel="btnRight2_3" includeIn="stHelp1,stHelp2" x="539" y="200"
+					  click="btnRight2_3_clickHandler()" skinClass="components.btnRight2_4"
+					  visible.stHelp1="false"/>
+			<s:Button d:userLabel="btnRight3" includeIn="stHelp1,stHelp3" x="539" y="200"
+					  skinClass="components.btnRight4"
+					  visible.stHelp1="false"/>
+		</fx:DesignLayer>
+		<fx:DesignLayer d:userLabel="L">
+			<s:Button id="button6" includeIn="stHelp1,stMainMenu" x="3" y="200"
+					  skinClass="components.btnLeft1" transformX="48.5" transformY="54.5"
+					  x.stMainMenu="-97"/>
+			<s:Button includeIn="stHelp1,stHelp2" x="3" y="200" click="button_clickHandler_4()"
+					  skinClass="components.btnLeft1_2"
+					  visible.stHelp1="false"/>
+			<s:Button includeIn="stHelp1,stHelp3" x="3" y="200" click="button_clickHandler_3()"
+					  skinClass="components.btnLeft2_3"
+					  visible.stHelp1="false"/>
+		</fx:DesignLayer>
+	</fx:DesignLayer>
+	<fx:DesignLayer id="designlayer1" d:userLabel="MainMenu"
+					visible.stGameplay="false"
+					visible.stLose="false"
+					visible.stWin="false">
+		<s:BitmapImage id="bitmapimage3" d:userLabel="imgWhale"
+					   includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stStart,stWin"
+					   x="538" y="390" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgWhale.png')"
+					   x.stHelp1="641" y.stHelp1="481"
+					   x.stHelp2="641" y.stHelp2="481"
+					   x.stHelp3="641" y.stHelp3="481"
+					   x.stStart="622" y.stStart="528"/>
+		<s:BitmapImage id="bitmapimage2" d:userLabel="txtCopyright"
+					   includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stStart,stWin"
+					   x="5" y="460" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/txtCopyright.png')"
+					   y.stHelp1="486"
+					   y.stHelp2="486"
+					   y.stHelp3="486"
+					   y.stStart="491"/>
+		<s:Button id="button2"
+				  includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stStart,stWin"
+				  y="203" click="button_clickHandler()" skinClass="components.btnHelp"
+				  x.stGameplay="333"
+				  x.stHelp1="638"
+				  x.stHelp2="638"
+				  x.stHelp3="638"
+				  x.stLose="333"
+				  x.stMainMenu="333"
+				  x.stStart="638"
+				  x.stWin="333"/>
+		<s:Button id="button1"
+				  includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stStart,stWin"
+				  y="203" click="button_clickHandler_1()" skinClass="components.btnPlay"
+				  x.stGameplay="124"
+				  x.stHelp1="-179"
+				  x.stHelp2="-179"
+				  x.stHelp3="-179"
+				  x.stLose="124"
+				  x.stMainMenu="124"
+				  x.stStart="-179"
+				  x.stWin="124"/>
+		<s:BitmapImage id="bitmapimage1" d:userLabel="imgbanner"
+					   includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stStart,stWin"
+					   x="66" y="46" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgbanner.png')"
+					   y.stHelp1="-146"
+					   y.stHelp2="-146"
+					   y.stHelp3="-146"
+					   y.stStart="-162"/>
+	</fx:DesignLayer>
+	<fx:DesignLayer id="designlayer2" d:userLabel="GameHud"
+					visible.stHelp1="false"
+					visible.stHelp2="false"
+					visible.stHelp3="false"
+					visible.stLose="false"
+					visible.stMainMenu="false"
+					visible.stStart="false"
+					visible.stWin="false">
+			
+		<s:BitmapImage id="bitmapimage10" d:userLabel="imgRecordBkg"
+					   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="237" y="30"
+					   smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgRecordBkg.png')"
+					   y.stMainMenu="-134">
+		</s:BitmapImage>
+		<s:BitmapImage id="bitmapimage8" d:userLabel="imgScoreBkg"
+					   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="468" y="30"
+					   smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgScoreBkg.png')"
+					   y.stMainMenu="-134"/>
+		<s:BitmapImage id="bitmapimage6" d:userLabel="imgLevelBkg"
+					   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="14" y="30"
+					   smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgLevelBkg.png')"
+					   y.stMainMenu="-134"/>
+		<s:RichText id="richtext3" d:userLabel="varRecord"
+					includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="272" y="64"
+					color="#00ffcc" fontFamily="Heavy Heap" fontSize="36.9" kerning="off"
+					lineHeight="120%" textAlign="right" whiteSpaceCollapse="preserve"
+					y.stMainMenu="-100">
+			<s:content><s:p><s:span>28,415</s:span></s:p></s:content>
+		</s:RichText>
+		<s:RichText id="richtext2" d:userLabel="varScore"
+					includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="498" y="64"
+					color="#00ffcc" fontFamily="Heavy Heap" fontSize="36.9" kerning="off"
+					lineHeight="120%" textAlign="right" whiteSpaceCollapse="preserve"
+					y.stMainMenu="-100">
+			<s:content><s:p><s:span>13,584</s:span></s:p></s:content>
+		</s:RichText>
+		<s:RichText id="richtext1" d:userLabel="varLevel"
+					includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="44" y="63"
+					color="#00ffcc" fontFamily="Heavy Heap" fontSize="39.672" kerning="off"
+					lineHeight="120%" textAlign="center" whiteSpaceCollapse="preserve"
+					y.stMainMenu="-101">
+			<s:content><s:p><s:span>8</s:span></s:p></s:content>
+		</s:RichText>
+	</fx:DesignLayer>
+	<s:Rect id="rect1" d:userLabel="imgDarkness" includeIn="stMainMenu,stStart" x="-7.5" y="-16.5"
+			width="675" height="507"
+			visible.stMainMenu="false">
+		<s:stroke>
+			<s:SolidColorStroke caps="none" color="#5C5C5C" joints="miter" miterLimit="4"
+								weight="1"/>
+		</s:stroke>
+		<s:fill>
+			<s:SolidColor color="#000000"/>
+		</s:fill>
+	</s:Rect>
+	<s:BitmapImage d:userLabel="CameraOverlay"
+				   includeIn="stMainMenu,stHelp3,stHelp2,stLose,stWin,stGameplay,stHelp1" x="0"
+				   y="0" d:locked="true" smooth="true"
+				   source="@Embed('/assets/images/PenguinMenus CONVERTED/CameraOverlay.png')"
+				   visible.stGameplay="false"/>
+	<s:Button includeIn="stLose,stWin,stGameplay" x="90" y="372" click="button_clickHandler_7()"
+			  skinClass="components.caseWin"
+			  x.stGameplay="-86" y.stGameplay="409"
+			  visible.stLose="false"
+			  visible.stWin="false"/>
+	<s:Button includeIn="stLose,stWin,stGameplay" x="515" y="375" click="button_clickHandler_8()"
+			  skinClass="components.caseLose"
+			  x.stGameplay="698" y.stGameplay="409"
+			  visible.stLose="false"
+			  visible.stWin="false"/>
+	<fx:DesignLayer d:userLabel="Border">
+		<s:Rect includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stStart,stWin"
+				x="640" y="-165" width="529" height="1062"
+				visible.stGameplay="false">
+			<s:fill>
+				<s:SolidColor color="#000000"/>
+			</s:fill>
+		</s:Rect>
+		<s:Rect includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stStart,stWin"
+				x="-529" y="-165" width="529" height="1066"
+				visible.stGameplay="false">
+			<s:fill>
+				<s:SolidColor color="#000000"/>
+			</s:fill>
+		</s:Rect>
+		<s:Rect includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stStart,stWin" x="43"
+				y="-651" width="231" height="773" rotation="-90" transformX="264.5"
+				transformY="386.5"
+				visible.stGameplay="false">
+			<s:fill>
+				<s:SolidColor color="#000000"/>
+			</s:fill>
+		</s:Rect>
+		<s:Rect includeIn="stGameplay,stHelp1,stHelp2,stHelp3,stLose,stMainMenu,stStart,stWin" x="79"
+				y="248" width="419" height="773" rotation="-90" transformX="264.5"
+				transformY="386.5"
+				visible.stGameplay="false">
+			<s:fill>
+				<s:SolidColor color="#000000"/>
+			</s:fill>
+		</s:Rect>
+		<s:Rect d:userLabel="imgLoading" includeIn="stLoad" x="-11" y="-7" width="662" height="505">
+			<s:fill>
+				<s:LinearGradient rotation="90">
+					<s:GradientEntry alpha="1.0" color="#7EE8ED" ratio="0"/>
+					<s:GradientEntry alpha="1.0" color="#07486D" ratio="1"/>
+				</s:LinearGradient>
+			</s:fill>
+		</s:Rect>
+		<s:RichText d:userLabel="txtLoading" includeIn="stLoad" x="211" y="206" width="222"
+					height="97" color="#FFFFFF" fontFamily="Arial" fontSize="51"
+					tabStops="S0 S50 S100 S150 S200 S250" text="Loading..."/>
+	</fx:DesignLayer>
+	<s:transitions>
+		<s:Transition fromState="stStart" interruptionBehavior="stop" toState="stMainMenu">
+			<s:Parallel>
+				<s:Animate duration="750" startDelay="2500" target="{bitmapimage3}">
+					<s:easer>
+						<s:Power easeInFraction="0.73"/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="550" startDelay="2350" target="{bitmapimage2}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" startDelay="1400" target="{button2}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" startDelay="1400" target="{button1}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="2000" target="{bitmapimage1}">
+					<s:easer>
+						<s:Bounce/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Fade duration="1000" target="{rect1}"/>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="stHelp1" interruptionBehavior="stop" toState="stMainMenu">
+			<s:Parallel>
+				<s:Animate duration="750" target="{bitmapimage7}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="750" target="{bitmapimage9}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="750" target="{bitmapimage29}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="750" target="{bitmapimage5}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Parallel target="{button3}">
+					<s:Animate duration="1500">
+						<s:SimpleMotionPath property="x"/>
+						<s:SimpleMotionPath property="y"/>
+					</s:Animate>
+					<s:Fade duration="700"/>
+				</s:Parallel>
+				<s:Animate duration="1500" target="{bitmapimage4}">
+					<s:easer>
+						<s:Bounce/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="900" startDelay="1000" target="{bitmapimage3}">
+					<s:easer>
+						<s:Bounce/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1700" target="{bitmapimage2}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" startDelay="1400" target="{button2}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" startDelay="1400" target="{button1}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="2000" target="{bitmapimage1}">
+					<s:easer>
+						<s:Bounce/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="stMainMenu" interruptionBehavior="stop" toState="stHelp1">
+			<s:Parallel>
+				<s:Animate duration="1000" target="{bitmapimage7}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" target="{bitmapimage9}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" target="{bitmapimage29}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" target="{bitmapimage5}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" target="{button3}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="2000" target="{bitmapimage4}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Parallel target="{button7}">
+					<s:Animate duration="750">
+						<s:SimpleMotionPath property="x"/>
+						<s:SimpleMotionPath property="y"/>
+					</s:Animate>
+					<s:Rotate3D angleXFrom="0" angleXTo="360" duration="750"/>
+				</s:Parallel>
+				<s:Parallel target="{button6}">
+					<s:Animate duration="750">
+						<s:SimpleMotionPath property="x"/>
+						<s:SimpleMotionPath property="y"/>
+					</s:Animate>
+					<s:Rotate3D angleXFrom="0" angleXTo="360" angleYFrom="0" angleYTo="0"
+								duration="750"/>
+				</s:Parallel>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="stMainMenu" interruptionBehavior="stop" toState="stGameplay">
+			<s:Parallel>
+				<s:Fade duration="2000" target="{designlayer2}"/>
+				<s:Animate duration="1000" target="{bitmapimage10}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" target="{bitmapimage8}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" target="{bitmapimage6}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" target="{richtext3}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" target="{richtext2}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" target="{richtext1}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="stGameplay" interruptionBehavior="stop" toState="stWin">
+			<s:Parallel>
+				<s:Animate duration="1000" target="{bitmapimage11}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="500" startDelay="1000" target="{bitmapimage14}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="500" startDelay="1500" target="{bitmapimage13}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="500" startDelay="2000" target="{bitmapimage12}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Parallel target="{bitmapimage26}">
+					<s:Fade duration="500" startDelay="3500"/>
+					<s:Rotate3D angleXFrom="0" angleXTo="360" duration="400" startDelay="3500">
+						<s:easer>
+							<s:Bounce/>
+						</s:easer>
+					</s:Rotate3D>
+				</s:Parallel>
+				<s:Parallel target="{bitmapimage25}">
+					<s:Fade duration="500" startDelay="3000"/>
+					<s:Rotate3D angleXFrom="0" angleXTo="360" duration="400" startDelay="3000">
+						<s:easer>
+							<s:Bounce/>
+						</s:easer>
+					</s:Rotate3D>
+				</s:Parallel>
+				<s:Parallel target="{bitmapimage24}">
+					<s:Fade duration="500" startDelay="2500"/>
+					<s:Rotate3D angleXFrom="0" angleXTo="360" duration="400" startDelay="2500">
+						<s:easer>
+							<s:Bounce/>
+						</s:easer>
+					</s:Rotate3D>
+				</s:Parallel>
+				<s:Fade duration="500" startDelay="2500" target="{richtext4}"/>
+				<s:Fade duration="500" startDelay="3000" target="{richtext5}"/>
+				<s:Fade duration="500" startDelay="3500" target="{richtext6}"/>
+				<s:Animate duration="1000" startDelay="2000" target="{button4}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="500" startDelay="1000" target="{bitmapimage15}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Fade duration="250" target="{designlayer2}"/>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="stGameplay" interruptionBehavior="stop" toState="stLose">
+			<s:Parallel>
+				<s:Animate duration="1000" target="{bitmapimage16}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="500" startDelay="1000" target="{bitmapimage18}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="500" startDelay="1500" target="{bitmapimage19}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Parallel target="{bitmapimage28}">
+					<s:Fade duration="500" startDelay="2500"/>
+					<s:Rotate3D angleXFrom="0" angleXTo="360" duration="400" startDelay="2500">
+						<s:easer>
+							<s:Bounce/>
+						</s:easer>
+					</s:Rotate3D>
+				</s:Parallel>
+				<s:Parallel target="{bitmapimage27}">
+					<s:Fade duration="500" startDelay="2000"/>
+					<s:Rotate3D angleXFrom="0" angleXTo="360" duration="400" startDelay="2000">
+						<s:easer>
+							<s:Bounce/>
+						</s:easer>
+					</s:Rotate3D>
+				</s:Parallel>
+				<s:Fade duration="500" startDelay="2000" target="{richtext7}"/>
+				<s:Fade duration="500" startDelay="2500" target="{richtext8}"/>
+				<s:Animate duration="1000" startDelay="1500" target="{button5}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="500" startDelay="1000" target="{bitmapimage17}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Fade duration="250" target="{designlayer2}"/>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="stHelp2" interruptionBehavior="stop" toState="stMainMenu">
+			<s:Parallel>
+				<s:Animate duration="750" target="{bitmapimage7}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="750" target="{bitmapimage20}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="750" target="{bitmapimage30}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="750" target="{bitmapimage21}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Parallel target="{button3}">
+					<s:Animate duration="1500">
+						<s:SimpleMotionPath property="x"/>
+						<s:SimpleMotionPath property="y"/>
+					</s:Animate>
+					<s:Fade duration="750"/>
+				</s:Parallel>
+				<s:Animate duration="1500" target="{bitmapimage4}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="850" startDelay="1000" target="{bitmapimage3}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1750" target="{bitmapimage2}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" startDelay="1400" target="{button2}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" startDelay="1400" target="{button1}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="2000" target="{bitmapimage1}">
+					<s:easer>
+						<s:Bounce/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="stHelp3" interruptionBehavior="stop" toState="stMainMenu">
+			<s:Parallel>
+				<s:Animate duration="750" target="{bitmapimage7}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="750" target="{bitmapimage23}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="750" target="{bitmapimage31}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="750" target="{bitmapimage22}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Parallel target="{button3}">
+					<s:Fade duration="700"/>
+					<s:Animate duration="1500">
+						<s:SimpleMotionPath property="x"/>
+						<s:SimpleMotionPath property="y"/>
+					</s:Animate>
+				</s:Parallel>
+				<s:Animate duration="1500" target="{bitmapimage4}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="900" startDelay="1000" target="{bitmapimage3}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1750" target="{bitmapimage2}">
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" startDelay="1400" target="{button2}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="1000" startDelay="1400" target="{button1}">
+					<s:easer>
+						<s:Elastic/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+				<s:Animate duration="2000" target="{bitmapimage1}">
+					<s:easer>
+						<s:Bounce/>
+					</s:easer>
+					<s:SimpleMotionPath property="x"/>
+					<s:SimpleMotionPath property="y"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+</s:Application>

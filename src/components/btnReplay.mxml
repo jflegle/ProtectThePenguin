@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+		width="286" height="133">
+	<fx:Metadata>[HostComponent("spark.components.Button")]</fx:Metadata>
+	<s:states>
+		<s:State name="up"/>
+		<s:State name="over"/>
+		<s:State name="down"/>
+		<s:State name="disabled"/>
+	</s:states>
+	<fx:DesignLayer d:userLabel="btnReplay">
+		<s:BitmapImage d:userLabel="imgReplay" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/imgReplay.png')"
+					   x.disabled="4" y.disabled="4"
+					   x.down="4" y.down="4"
+					   x.over="0" y.over="0"
+					   x.up="4" y.up="4">
+			<s:filters>
+				<s:DropShadowFilter includeIn="over" alpha="0.5" angle="45.0" blurX="4.0" blurY="4.0"
+									color="#000000" distance="4.0" hideObject="false" inner="false"
+									knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter includeIn="down" alpha="0.5" angle="45.0" blurX="4.0" blurY="4.0"
+									color="#000000" distance="4.0" hideObject="false" inner="true"
+									knockout="false" quality="2" strength="1"/>
+				<s:BlurFilter includeIn="disabled" blurX="4.0" blurY="4.0" quality="2"/>
+			</s:filters>
+		</s:BitmapImage>
+		<s:BitmapImage d:userLabel="txtReplay" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED/txtReplay.png')"
+					   x.disabled="24" y.disabled="15"
+					   x.down="24" y.down="15"
+					   x.over="20" y.over="11"
+					   x.up="24" y.up="15">
+			<s:filters>
+				<s:DropShadowFilter includeIn="over" alpha="0.5" angle="45.0" blurX="4.0" blurY="4.0"
+									color="#000000" distance="4.0" hideObject="false" inner="false"
+									knockout="false" quality="2" strength="1"/>
+				<s:DropShadowFilter includeIn="down" alpha="0.5" angle="45.0" blurX="4.0" blurY="4.0"
+									color="#000000" distance="4.0" hideObject="false" inner="true"
+									knockout="false" quality="2" strength="1"/>
+				<s:BlurFilter includeIn="disabled" blurX="4.0" blurY="4.0" quality="2"/>
+			</s:filters>
+		</s:BitmapImage>
+	</fx:DesignLayer>
+</s:Skin>

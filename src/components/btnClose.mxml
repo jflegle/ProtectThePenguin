@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+		width="56" height="56">
+	<fx:Metadata>[HostComponent("spark.components.Button")]</fx:Metadata>
+	<s:states>
+		<s:State name="up"/>
+		<s:State name="over"/>
+		<s:State name="down"/>
+		<s:State name="disabled"/>
+	</s:states>
+	<fx:DesignLayer d:userLabel="btnX">
+		<s:BitmapImage d:userLabel="Idle" includeIn="disabled,up" x="0" y="0" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED2/Idle.png')">
+			<s:filters>
+				<s:DropShadowFilter includeIn="up" alpha="0.5" angle="135" blurX="4.0" blurY="4.0"
+									color="#000000" distance="4.0" hideObject="false" inner="false"
+									knockout="false" quality="2" strength="1"/>
+				<s:BlurFilter includeIn="disabled" blurX="4.0" blurY="4.0" quality="2"/>
+			</s:filters>
+		</s:BitmapImage>
+		<s:BitmapImage d:userLabel="Over" includeIn="over,up" x="0" y="0" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED2/Over.png')"
+					   visible.up="false">
+			<s:filters>
+				<s:DropShadowFilter includeIn="over" alpha="0.5" angle="135" blurX="4.0" blurY="4.0"
+									color="#000000" distance="4.0" hideObject="false" inner="false"
+									knockout="false" quality="2" strength="1"/>
+			</s:filters>
+		</s:BitmapImage>
+		<s:BitmapImage d:userLabel="Down" includeIn="down,up" x="0" y="0" smooth="true"
+					   source="@Embed('/assets/images/PenguinMenus CONVERTED2/Down.png')"
+					   visible.up="false">
+			<s:filters>
+				<s:DropShadowFilter includeIn="down" alpha="0.5" angle="135" blurX="4.0" blurY="4.0"
+									color="#000000" distance="1" hideObject="false" inner="false"
+									knockout="false" quality="2" strength="1"/>
+			</s:filters>
+		</s:BitmapImage>
+	</fx:DesignLayer>
+</s:Skin>
